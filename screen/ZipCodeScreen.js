@@ -1,6 +1,6 @@
 import React from 'react'
 // import { FlatList } from 'react-native-gesture-handler'
-import { FlatList } from 'react-native'
+import { FlatList, Touchable, TouchableHighlight } from 'react-native'
 
 const availableZipItems = [ 
     { place: 'Hatyai', code: '90110' }, 
@@ -11,10 +11,14 @@ const availableZipItems = [
   ] 
    
 const ZipItem = ({place, code, navigation}) => ( 
-    <View> 
-    <Text>{place}</Text> 
-    <Text>{code}</Text> 
-    </View> 
+    <TouchableHighlight onPress={() => {
+        navigation.navigate('weather',{zipCode: code})
+    }}>
+        <View> 
+            <Text>{place}</Text> 
+            <Text>{code}</Text> 
+        </View> 
+    </TouchableHighlight>
 ) 
 
 const _keyExtractor = item => item.code 
@@ -25,7 +29,7 @@ export default function ZipCodeScreen(){
     <View> 
         <FlatList 
         data={availableZipItems} 
-        keyExtractor={_keyExtractor} 
+        keyExtractor = {item => item.code /*_keyExtractor */} 
         renderItem={({item}) => <ZipItem {...item} navigation={navigation}/>} 
         /> 
         <StatusBar style="auto" /> 
@@ -33,3 +37,17 @@ export default function ZipCodeScreen(){
     ); 
     
 } 
+
+const styles = StyleSheet.create({
+    zipItem: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
+    },
+    zipPlace: {
+        flex: 1
+    }
+    zipCode: {
+        flex: 1
+    }
+})
