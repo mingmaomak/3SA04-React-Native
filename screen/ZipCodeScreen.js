@@ -1,3 +1,7 @@
+import React from 'react'
+// import { FlatList } from 'react-native-gesture-handler'
+import { FlatList } from 'react-native'
+
 const availableZipItems = [ 
     { place: 'Hatyai', code: '90110' }, 
     { place: 'Trang', code: '92000' }, 
